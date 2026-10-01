@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Casinha 🏠🎀</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root{
+  --pink:#f5c8d8;
+  --pink2:#ffe9f1;
+  --pink3:#e99ab8;
+  --purple:#b99ad8;
+  --purple2:#eee5fa;
+  --cream:#fffaf7;
+  --white:#ffffff;
+  --text:#4b3d46;
+  --muted:#8d7c86;
+  --green:#a9d8bd;
+  --shadow:0 15px 45px rgba(100,65,85,.13);
+  --radius:24px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:linear-gradient(135deg,#fff7fa,#f5effb);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button{
+  font-family:inherit;
+  border:0;
+  cursor:pointer;
+}
+
+.app{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* HEADER */
+
+header{
+  height:78px;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid rgba(150,100,130,.1);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-icon{
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  box-shadow:0 8px 20px rgba(190,130,165,.25);
+}
+
+.logo h1{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+}
+
+.logo small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:-2px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.coins{
+  background:#fff4c9;
+  padding:11px 17px;
+  border-radius:30px;
+  font-weight:700;
+  box-shadow:0 5px 15px rgba(180,140,50,.1);
+}
+
+.icon-btn{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  background:var(--pink2);
+  font-size:19px;
+  transition:.2s;
+}
+
+.icon-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* LAYOUT */
+
+.main{
+  display:grid;
+  grid-template-columns:220px 1fr 290px;
+  gap:18px;
+  padding:20px;
+  flex:1;
+}
+
+/* SIDEBAR */
+
+.sidebar,
+.rightbar{
+  background:rgba(255,255,255,.8);
+  border:1px solid rgba(150,100,130,.08);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:var(--shadow);
+  height:max-content;
+}
+
+.menu-title{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:#a18e98;
+  margin:8px 10px 10px;
+  font-weight:700;
+}
+
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.menu button{
+  width:100%;
+  text-align:left;
+  background:transparent;
+  padding:13px;
+  border-radius:15px;
+  color:var(--text);
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:.2s;
+}
+
+.menu button:hover,
+.menu button.active{
+  background:linear-gradient(90deg,var(--pink2),var(--purple2));
+  transform:translateX(3px);
+}
+
+.tip{
+  margin-top:20px;
+  padding:14px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#fff1f6,#f4edff);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.tip strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+/* HOUSE */
+
+.house-area{
+  min-width:0;
+}
+
+.room-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.room-title h2{
+  font-family:'Playfair Display',serif;
+  font-size:27px;
+}
+
+.room-title p{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.room-actions{
+  display:flex;
+  gap:8px;
+}
+
+.small-btn{
+  background:white;
+  border:1px solid #eee1e8;
+  border-radius:13px;
+  padding:9px 12px;
+  font-weight:600;
+  color:var(--text);
+}
+
+.small-btn:hover{
+  background:var(--pink2);
+}
+
+/* ROOM */
+
+.room{
+  width:100%;
+  aspect-ratio:16/10;
+  min-height:470px;
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  background:#f7e7df;
+  border:7px solid white;
+  user-select:none;
+}
+
+/* wall */
+.wall{
+  position:absolute;
+  inset:0 0 25% 0;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.45) 0 2px,transparent 3px),
+    linear-gradient(135deg,#ffeef3,#f9dce7);
+}
+
+/* floor */
+.floor{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:25%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(130,85,65,.08) 0 3px,
+      transparent 3px 90px
+    ),
+    linear-gradient(#dcb79d,#cfa589);
+}
+
+/* window */
+.window{
+  position:absolute;
+  width:150px;
+  height:105px;
+  top:42px;
+  right:45px;
+  border:9px solid white;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 18px rgba(60,40,50,.12);
+  background:linear-gradient(#bde4f7,#e8f7ff);
+}
+
+.window::before{
+  content:"";
+  position:absolute;
+  width:6px;
+  height:100%;
+  background:white;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.window::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:6px;
+  background:white;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.sun{
+  position:absolute;
+  width:35px;
+  height:35px;
+  background:#ffe58a;
+  border-radius:50%;
+  right:20px;
+  top:15px;
+}
+
+/* rug */
+
+.rug{
+  position:absolute;
+  width:42%;
+  height:27%;
+  left:29%;
+  bottom:8%;
+  border-radius:50%;
+  background:#efd3df;
+  opacity:.8;
+}
+
+/* objects */
+
+.object{
+  position:absolute;
+  z-index:20;
+  cursor:grab;
+  transform-origin:center;
+  transition:filter .15s;
+}
+
+.object:active{
+  cursor:grabbing;
+}
+
+.object:hover{
+  filter:drop-shadow(0 8px 8px rgba(60,40,50,.2));
+}
+
+.object.selected{
+  outline:2px dashed var(--pink3);
+  outline-offset:6px;
+}
+
+/* FURNITURE */
+
+.sofa{
+  width:190px;
+  height:75px;
+  left:40px;
+  bottom:65px;
+}
+
+.sofa-seat{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:52px;
+  background:#e8b6c8;
+  border-radius:20px 20px 14px 14px;
+}
+
+.sofa-back{
+  position:absolute;
+  left:10px;
+  top:0;
+  width:calc(100% - 20px);
+  height:45px;
+  background:#d99eb6;
+  border-radius:20px 20px 10px 10px;
+}
+
+.pillow{
+  position:absolute;
+  width:35px;
+  height:30px;
+  background:#fff2f7;
+  border-radius:10px;
+  top:10px;
+}
+
+.pillow.one{left:28px}
+.pillow.two{right:28px}
+
+.table{
+  width:120px;
+  height:100px;
+  right:180px;
+  bottom:45px;
+}
+
+.table-top{
+  width:100%;
+  height:34px;
+  background:#b98260;
+  border-radius:18px;
+}
+
+.table-leg{
+  position:absolute;
+  width:12px;
+  height:60px;
+  background:#98684f;
+  top:27px;
+}
+
+.table-leg.one{left:20px}
+.table-leg.two{right:20px}
+
+.bed{
+  width:210px;
+  height:130px;
+  left:35px;
+  bottom:50px;
+}
+
+.bed-mattress{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:85px;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 8px 12px rgba(80,50,50,.12);
+}
+
+.bed-head{
+  position:absolute;
+  left:0;
+  top:0;
+  width:22px;
+  height:100%;
+  background:#d59ab2;
+  border-radius:14px;
+}
+
+.bed-blanket{
+  position:absolute;
+  right:5px;
+  bottom:5px;
+  width:115px;
+  height:75px;
+  background:#efbfd0;
+  border-radius:15px;
+}
+
+.pillow-bed{
+  position:absolute;
+  left:35px;
+  bottom:45px;
+  width:55px;
+  height:38px;
+  background:#fff4f8;
+  border-radius:13px;
+}
+
+.plant{
+  width:75px;
+  height:110px;
+  bottom:42px;
+  right:35px;
+}
+
+.pot{
+  position:absolute;
+  bottom:0;
+  left:17px;
+  width:42px;
+  height:40px;
+  background:#e8a8a8;
+  border-radius:8px 8px 15px 15px;
+}
+
+.leaves{
+  position:absolute;
+  bottom:32px;
+  left:7px;
+  font-size:65px;
+}
+
+.tv{
+  width:145px;
+  height:100px;
+  top:45px;
+  left:45px;
+}
+
+.tv-screen{
+  width:145px;
+  height:80px;
+  background:#302c3d;
+  border:7px solid #282331;
+  border-radius:10px;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:30px;
+}
+
+.tv-leg{
+  width:40px;
+  height:10px;
+  background:#282331;
+  margin:auto;
+}
+
+.lamp{
+  width:60px;
+  height:150px;
+  right:45px;
+  bottom:45px;
+}
+
+.lamp-shade{
+  width:58px;
+  height:48px;
+  background:#fff2c9;
+  border-radius:30px 30px 8px 8px;
+}
+
+.lamp-stick{
+  width:7px;
+  height:75px;
+  background:#8f6d78;
+  margin:auto;
+}
+
+.lamp-base{
+  width:45px;
+  height:10px;
+  background:#8f6d78;
+  border-radius:50%;
+  margin:auto;
+}
+
+/* right bar */
+
+.panel{
+  display:none;
+}
+
+.panel.active{
+  display:block;
+}
+
+.panel-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.panel-title h3{
+  font-family:'Playfair Display',serif;
+  font-size:21px;
+}
+
+.store-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.item-card{
+  background:#fffafa;
+  border:1px solid #f0e2e8;
+  border-radius:18px;
+  padding:10px;
+  text-align:center;
+  transition:.2s;
+}
+
+.item-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 25px rgba(80,50,70,.1);
+}
+
+.item-icon{
+  height:65px;
+  display:grid;
+  place-items:center;
+  font-size:42px;
+  background:#fff1f5;
+  border-radius:14px;
+  margin-bottom:8px;
+}
+
+.item-card strong{
+  display:block;
+  font-size:12px;
+}
+
+.item-price{
+  font-size:11px;
+  color:#a07989;
+  margin:3px 0 7px;
+}
+
+.buy{
+  width:100%;
+  background:linear-gradient(135deg,var(--pink3),#c99ad8);
+  color:white;
+  border-radius:10px;
+  padding:8px 4px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.buy:disabled{
+  background:#ddd;
+  cursor:not-allowed;
+}
+
+/* tasks */
+
+.task{
+  padding:12px;
+  border:1px solid #f0e3e8;
+  border-radius:16px;
+  margin-bottom:8px;
+  background:white;
+}
+
+.task-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  font-weight:700;
+}
+
+.task p{
+  font-size:10px;
+  color:var(--muted);
+  margin:4px 0 8px;
+}
+
+.task button{
+  width:100%;
+  padding:7px;
+  border-radius:9px;
+  background:#e8f6ed;
+  color:#46755a;
+  font-weight:700;
+  font-size:11px;
+}
+
+.task button:disabled{
+  opacity:.5;
+}
+
+/* stats */
+
+.stat{
+  margin-bottom:13px;
+}
+
+.stat-head{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+.bar{
+  height:8px;
+  border-radius:10px;
+  background:#eee7eb;
+  overflow:hidden;
+}
+
+.bar span{
+  display:block;
+  height:100%;
+  border-radius:10px;
+  background:linear-gradient(90deg,var(--pink3),var(--purple));
+  transition:.5s;
+}
+
+/* toast */
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  z-index:3000;
+  background:#4b3d46;
+  color:white;
+  padding:14px 18px;
+  border-radius:15px;
+  box-shadow:0 15px 35px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
+  transition:.3s;
+  pointer-events:none;
+  font-size:13px;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* MODAL */
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(50,35,45,.4);
+  backdrop-filter:blur(6px);
+  display:none;
+  place-items:center;
+  z-index:2000;
+  padding:20px;
+}
+
+.modal-bg.show{
+  display:grid;
+}
+
+.modal{
+  width:min(500px,100%);
+  background:white;
+  border-radius:28px;
+  padding:25px;
+  box-shadow:0 30px 70px rgba(0,0,0,.25);
+  animation:pop .25s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.9);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.modal h2{
+  font-family:'Playfair Display',serif;
+  margin-bottom:15px;
+}
+
+.close{
+  float:right;
+  background:#f7edf2;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+}
+
+.theme-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.theme{
+  padding:15px;
+  border-radius:15px;
+  border:2px solid transparent;
+  background:#fafafa;
+  text-align:left;
+}
+
+.theme:hover{
+  border-color:var(--pink3);
+}
+
+.theme-preview{
+  height:50px;
+  border-radius:12px;
+  margin-bottom:7px;
+}
+
+/* floating buttons */
+
+.edit-bar{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(255,255,255,.95);
+  padding:8px;
+  border-radius:16px;
+  display:none;
+  gap:5px;
+  box-shadow:0 8px 25px rgba(60,40,50,.15);
+  z-index:100;
+}
+
+.edit-mode .edit-bar{
+  display:flex;
+}
+
+.edit-bar button{
+  width:38px;
+  height:35px;
+  border-radius:10px;
+  background:#fff0f5;
+}
+
+.edit-mode .object:hover{
+  outline:2px dashed #e99ab8;
+  outline-offset:4px;
+}
+
+/* mobile */
+
+@media(max-width:1050px){
+  .main{
+    grid-template-columns:180px 1fr;
+  }
+  .rightbar{
+    display:none;
+  }
+}
+
+@media(max-width:720px){
+  header{
+    padding:0 12px;
+  }
+
+  .logo h1{
+    font-size:18px;
+  }
+
+  .main{
+    display:block;
+    padding:10px;
+  }
+
+  .sidebar{
+    margin-bottom:12px;
+  }
+
+  .menu{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+  }
+
+  .menu button{
+    justify-content:center;
+    padding:10px 4px;
+    font-size:10px;
+    flex-direction:column;
+    gap:3px;
+  }
+
+  .tip{
+    display:none;
+  }
+
+  .room{
+    min-height:390px;
+  }
+
+  .coins{
+    padding:8px 10px;
+    font-size:12px;
+  }
+}
+
+/* night */
+
+body.night{
+  background:#201d29;
+  color:#eee5eb;
+}
+
+body.night header,
+body.night .sidebar,
+body.night .rightbar{
+  background:rgba(42,38,51,.94);
+  color:#eee5eb;
+}
+
+body.night .menu button,
+body.night .small-btn{
+  color:#eee5eb;
+}
+
+body.night .menu button:hover,
+body.night .menu button.active{
+  background:#514358;
+}
+
+body.night .item-card,
+body.night .task{
+  background:#332e3d;
+  border-color:#4b4255;
+}
+
+body.night .item-icon{
+  background:#44394c;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🏠</div>
+    <div>
+      <h1>Minha Casinha</h1>
+      <small>meu pequeno mundo ✨</small>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <div class="coins">🪙 <span id="coins">1000</span></div>
+    <button class="icon-btn" onclick="toggleNight()" title="Modo noite">🌙</button>
+    <button class="icon-btn" onclick="openSettings()" title="Configurações">⚙️</button>
+  </div>
+</header>
+
+
+<div class="main">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="menu-title">Minha casa</div>
+
+<div class="menu">
+
+<button class="active" onclick="changeRoom('sala',this)">🛋️ <span>Sala</span></button>
+<button onclick="changeRoom('quarto',this)">🛏️ <span>Quarto</span></button>
+<button onclick="changeRoom('cozinha',this)">🍳 <span>Cozinha</span></button>
+<button onclick="changeRoom('banheiro',this)">🛁 <span>Banheiro</span></button>
+<button onclick="changeRoom('jardim',this)">🌷 <span>Jardim</span></button>
+
+</div>
+
+<div class="menu-title">Ações</div>
+
+<div class="menu">
+
+<button onclick="toggleEdit()">🛠️ <span>Decorar</span></button>
+<button onclick="openShop()">🛍️ <span>Loja</span></button>
+<button onclick="openTasks()">✨ <span>Tarefas</span></button>
+
+</div>
+
+<div class="tip">
+<strong>💡 Dica</strong>
+Entre no modo decoração e arraste os móveis para deixar sua casinha do seu jeitinho!
+</div>
+
+</aside>
+
+
+<!-- HOUSE -->
+
+<main class="house-area">
+
+<div class="room-header">
+
+<div class="room-title">
+<h2 id="roomName">Sala</h2>
+<p id="roomDescription">Um lugar aconchegante para descansar.</p>
+</div>
+
+<div class="room-actions">
+<button class="small-btn" onclick="saveGame()">💾 Salvar</button>
+<button class="small-btn" onclick="resetRoom()">↩️ Resetar</button>
+</div>
+
+</div>
+
+
+<div class="room" id="room">
+
+<div class="wall" id="wall"></div>
+<div class="floor" id="floor"></div>
+
+<div class="window">
+<div class="sun"></div>
+</div>
+
+<div class="rug"></div>
+
+
+<!-- DEFAULT OBJECTS -->
+
+<div class="object sofa" data-id="sofa" style="left:40px;bottom:65px">
+<div class="sofa-back"></div>
+<div class="sofa-seat"></div>
+<div class="pillow one"></div>
+<div class="pillow two"></div>
+</div>
+
+<div class="object table" data-id="table" style="right:180px;bottom:45px">
+<div class="table-top"></div>
+<div class="table-leg one"></div>
+<div class="table-leg two"></div>
+</div>
+
+<div class="object plant" data-id="plant" style="right:35px;bottom:42px">
+<div class="leaves">🌿</div>
+<div class="pot"></div>
+</div>
+
+<div class="object tv" data-id="tv" style="left:45px;top:45px">
+<div class="tv-screen">📺</div>
+<div class="tv-leg"></div>
+</div>
+
+<div class="object lamp" data-id="lamp" style="right:45px;bottom:45px">
+<div class="lamp-shade"></div>
+<div class="lamp-stick"></div>
+<div class="lamp-base"></div>
+</div>
+
+
+<div class="edit-bar">
+<button onclick="rotateSelected()">🔄</button>
+<button onclick="moveFront()">⬆️</button>
+<button onclick="moveBack()">⬇️</button>
+<button onclick="deleteSelected()">🗑️</button>
+</div>
+
+</div>
+
+</main>
+
+
+<!-- RIGHT PANEL -->
+
+<aside class="rightbar">
+
+<div class="panel active" id="shopPanel">
+
+<div class="panel-title">
+<h3>🛍️ Loja</h3>
+<span style="font-size:11px;color:#999">itens</span>
+</div>
+
+<div class="store-grid">
+
+<div class="item-card">
+<div class="item-icon">🧸</div>
+<strong>Pelúcia</strong>
+<div class="item-price">120 moedas</div>
+<button class="buy" onclick="buyItem('pelucia',120)">Comprar</button>
+</div>
+
+<div class="item-card">
+<div class="item-icon">🪴</div>
+<strong>Vasinho</strong>
+<div class="item-price">80 moedas</div>
+<button class="buy" onclick="buyItem('vaso',80)">Comprar</button>
+</div>
+
+<div class="item-card">
+<div class="item-icon">🕯️</div>
+<strong>Vela</strong>
+<div class="item-price">60 moedas</div>
+<button class="buy" onclick="buyItem('vela',60)">Comprar</button>
+</div>
+
+<div class="item-card">
+<div class="item-icon">🖼️</div>
+<strong>Quadro</strong>
+<div class="item-price">150 moedas</div>
+<button class="buy" onclick="buyItem('quadro',150)">Comprar</button>
+</div>
+
+<div class="item-card">
+<div class="item-icon">🛋️</div>
+<strong>Poltrona</strong>
+<div class="item-price">280 moedas</div>
+<button class="buy" onclick="buyItem('poltrona',280)">Comprar</button>
+</div>
+
+<div class="item-card">
+<div class="item-icon">🧺</div>
+<strong>Cestinho</strong>
+<div class="item-price">90 moedas</div>
+<button class="buy" onclick="buyItem('cesto',90)">Comprar</button>
+</div>
+
+</div>
+</div>
+
+
+<div class="panel" id="tasksPanel">
+
+<div class="panel-title">
+<h3>✨ Tarefas</h3>
+</div>
+
+<div class="task">
+<div class="task-top">
+<span>🧹 Arrumar a casa</span>
+<span>+50</span>
+</div>
+<p>Deixe sua casa organizada.</p>
+<button onclick="completeTask(this,50)">Concluir</button>
+</div>
+
+<div class="task">
+<div class="task-top">
+<span>🌱 Cuidar das plantas</span>
+<span>+30</span>
+</div>
+<p>Suas plantinhas precisam de você.</p>
+<button onclick="completeTask(this,30)">Concluir</button>
+</div>
+
+<div class="task">
+<div class="task-top">
+<span>🐶 Brincar com o pet</span>
+<span>+40</span>
+</div>
+<p>Um pouquinho de diversão.</p>
+<button onclick="completeTask(this,40)">Concluir</button>
+</div>
+
+<div class="task">
+<div class="task-top">
+<span>🧼 Limpar o quarto</span>
+<span>+60</span>
+</div>
+<p>Organização nunca fez mal.</p>
+<button onclick="completeTask(this,60)">Concluir</button>
+</div>
+
+</div>
+
+
+<div class="panel" id="statsPanel">
+
+<div class="panel-title">
+<h3>📊 Minha casa</h3>
+</div>
+
+<div class="stat">
+<div class="stat-head">
+<span>✨ Felicidade</span>
+<span id="happyValue">80%</span>
+</div>
+<div class="bar"><span id="happyBar" style="width:80%"></span></div>
+</div>
+
+<div class="stat">
+<div class="stat-head">
+<span>🧹 Organização</span>
+<span id="cleanValue">70%</span>
+</div>
+<div class="bar"><span id="cleanBar" style="width:70%"></span></div>
+</div>
+
+<div class="stat">
+<div class="stat-head">
+<span>🌷 Beleza</span>
+<span id="beautyValue">75%</span>
+</div>
+<div class="bar"><span id="beautyBar" style="width:75%"></span></div>
+</div>
+
+<hr style="border:0;border-top:1px solid #eee;margin:18px 0">
+
+<p style="font-size:12px;color:#999;line-height:1.6">
+🏆 Continue cuidando da sua casa para desbloquear novas conquistas!
+</p>
+
+</div>
+
+</aside>
+
+</div>
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<!-- SETTINGS MODAL -->
+
+<div class="modal-bg" id="settingsModal">
+
+<div class="modal">
+
+<button class="close" onclick="closeSettings()">×</button>
+
+<h2>⚙️ Personalizar casa</h2>
+
+<p style="font-size:12px;color:#999;margin-bottom:15px">
+Escolha o estilo que combina com você.
+</p>
+
+<div class="theme-grid">
+
+<button class="theme" onclick="setTheme('pink')">
+<div class="theme-preview" style="background:linear-gradient(135deg,#ffeef3,#f9dce7)"></div>
+<strong>🌸 Rosa delicado</strong>
+</button>
+
+<button class="theme" onclick="setTheme('purple')">
+<div class="theme-preview" style="background:linear-gradient(135deg,#eee5fa,#d9c7ed)"></div>
+<strong>💜 Lilás</strong>
+</button>
+
+<button class="theme" onclick="setTheme('blue')">
+<div class="theme-preview" style="background:linear-gradient(135deg,#e5f5ff,#c8e6f7)"></div>
+<strong>🩵 Azul céu</strong>
+</button>
+
+<button class="theme" onclick="setTheme('cream')">
+<div class="theme-preview" style="background:linear-gradient(135deg,#fff7e8,#ead8bd)"></div>
+<strong>🤎 Aconchegante</strong>
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+/* =========================
+   GAME DATA
+========================= */
+
+let coins = Number(localStorage.getItem("coins")) || 1000;
+let selectedObject = null;
+let editMode = false;
+let currentRoom = "sala";
+
+let stats = JSON.parse(localStorage.getItem("stats")) || {
+  happy:80,
+  clean:70,
+  beauty:75
+};
+
+const rooms = {
+  sala:{
+    name:"Sala",
+    description:"Um lugar aconchegante para descansar."
+  },
+  quarto:{
+    name:"Quarto",
+    description:"Seu cantinho para dormir e relaxar."
+  },
+  cozinha:{
+    name:"Cozinha",
+    description:"Onde as melhores comidas acontecem."
+  },
+  banheiro:{
+    name:"Banheiro",
+    description:"Um espaço limpo e tranquilo."
+  },
+  jardim:{
+    name:"Jardim",
+    description:"Flores, plantas e muita paz."
+  }
+};
+
+
+/* =========================
+   COINS
+========================= */
+
+function updateCoins(){
+  document.getElementById("coins").textContent = coins;
+  localStorage.setItem("coins",coins);
+}
+
+updateCoins();
+
+
+/* =========================
+   TOAST
+========================= */
+
+function toast(message){
+
+  const t = document.getElementById("toast");
+
+  t.textContent = message;
+
+  t.classList.add("show");
+
+  setTimeout(()=>{
+    t.classList.remove("show");
+  },2200);
+}
+
+
+/* =========================
+   ROOMS
+========================= */
+
+function changeRoom(room,button){
+
+  currentRoom = room;
+
+  document.querySelectorAll(".menu button").forEach(b=>{
+    b.classList.remove("active");
+  });
+
+  if(button) button.classList.add("active");
+
+  document.getElementById("roomName").textContent =
+    rooms[room].name;
+
+  document.getElementById("roomDescription").textContent =
+    rooms[room].description;
+
+  toast("Entrando no " + rooms[room].name + " 🏠");
+
+  applyRoomStyle(room);
+}
+
+
+function applyRoomStyle(room){
+
+  const wall = document.getElementById("wall");
+  const floor = document.getElementById("floor");
+
+  if(room==="sala"){
+    wall.style.background="linear-gradient(135deg,#ffeef3,#f9dce7)";
+    floor.style.background="repeating-linear-gradient(90deg,rgba(130,85,65,.08) 0 3px,transparent 3px 90px),linear-gradient(#dcb79d,#cfa589)";
+  }
+
+  if(room==="quarto"){
+    wall.style.background="linear-gradient(135deg,#eee5fa,#dfd1ef)";
+    floor.style.background="linear-gradient(#d8bdab,#c5a18b)";
+  }
+
+  if(room==="cozinha"){
+    wall.style.background="linear-gradient(135deg,#fff8ec,#f3e4ce)";
+    floor.style.background="linear-gradient(#d7d7d7,#bcbcbc)";
+  }
+
+  if(room==="banheiro"){
+    wall.style.background="repeating-linear-gradient(45deg,#eefaff 0 25px,#dceff5 25px 50px)";
+    floor.style.background="linear-gradient(#dfe8eb,#bdcbd0)";
+  }
+
+  if(room==="jardim"){
+    wall.style.background="linear-gradient(#bce6f3,#e7f8e2)";
+    floor.style.background="linear-gradient(#a9d48c,#7fb66c)";
+  }
+}
+
+
+/* =========================
+   EDIT MODE
+========================= */
+
+function toggleEdit(){
+
+  editMode = !editMode;
+
+  document.getElementById("room")
+    .classList.toggle("edit-mode",editMode);
+
+  toast(
+    editMode
+    ? "🛠️ Modo decoração ativado!"
+    : "✅ Decoração salva!"
+  );
+}
+
+
+/* =========================
+   OBJECT SELECTION
+========================= */
+
+document.querySelectorAll(".object").forEach(obj=>{
+  enableObject(obj);
+});
+
+
+function enableObject(obj){
+
+  obj.addEventListener("click",function(e){
+
+    if(!editMode) return;
+
+    e.stopPropagation();
+
+    document.querySelectorAll(".object").forEach(o=>{
+      o.classList.remove("selected");
+    });
+
+    selectedObject = obj;
+    obj.classList.add("selected");
+  });
+
+
+  let dragging=false;
+  let offsetX=0;
+  let offsetY=0;
+
+  obj.addEventListener("mousedown",function(e){
+
+    if(!editMode) return;
+
+    dragging=true;
+
+    const rect=obj.getBoundingClientRect();
+
+    offsetX=e.clientX-rect.left;
+    offsetY=e.clientY-rect.top;
+
+    e.preventDefault();
+  });
+
+
+  document.addEventListener("mousemove",function(e){
+
+    if(!dragging) return;
+
+    const room=document.getElementById("room");
+    const roomRect=room.getBoundingClientRect();
+
+    let x=e.clientX-roomRect.left-offsetX;
+    let y=e.clientY-roomRect.top-offsetY;
+
+    x=Math.max(0,Math.min(x,room.clientWidth-obj.offsetWidth));
+    y=Math.max(0,Math.min(y,room.clientHeight-obj.offsetHeight));
+
+    obj.style.left=x+"px";
+    obj.style.top=y+"px";
+    obj.style.right="auto";
+    obj.style.bottom="auto";
+  });
+
+
+  document.addEventListener("mouseup",function(){
+    dragging=false;
+  });
+
+
+  /* touch */
+
+  obj.addEventListener("touchstart",function(e){
+
+    if(!editMode) return;
+
+    const touch=e.touches[0];
+    const rect=obj.getBoundingClientRect();
+
+    offsetX=touch.clientX-rect.left;
+    offsetY=touch.clientY-rect.top;
+
+    dragging=true;
+
+    e.preventDefault();
+
+  },{passive:false});
+
+
+  document.addEventListener("touchmove",function(e){
+
+    if(!dragging) return;
+
+    const touch=e.touches[0];
+    const room=document.getElementById("room");
+    const roomRect=room.getBoundingClientRect();
+
+    let x=touch.clientX-roomRect.left-offsetX;
+    let y=touch.clientY-roomRect.top-offsetY;
+
+    x=Math.max(0,Math.min(x,room.clientWidth-obj.offsetWidth));
+    y=Math.max(0,Math.min(y,room.clientHeight-obj.offsetHeight));
+
+    obj.style.left=x+"px";
+    obj.style.top=y+"px";
+    obj.style.right="auto";
+    obj.style.bottom="auto";
+
+    e.preventDefault();
+
+  },{passive:false});
+
+
+  document.addEventListener("touchend",function(){
+    dragging=false;
+  });
+
+}
+
+
+/* =========================
+   DECORATION CONTROLS
+========================= */
+
+function rotateSelected(){
+
+  if(!selectedObject){
+    toast("Selecione um móvel primeiro 🪑");
+    return;
+  }
+
+  let rotation=Number(selectedObject.dataset.rotation || 0);
+
+  rotation+=15;
+
+  selectedObject.dataset.rotation=rotation;
+
+  selectedObject.style.transform=`rotate(${rotation}deg)`;
+}
+
+
+function moveFront(){
+
+  if(!selectedObject){
+    toast("Selecione um objeto primeiro.");
+    return;
+  }
+
+  selectedObject.style.zIndex=100+Date.now()%500;
+}
+
+
+function moveBack(){
+
+  if(!selectedObject){
+    toast("Selecione um objeto primeiro.");
+    return;
+  }
+
+  selectedObject.style.zIndex=10;
+}
+
+
+function deleteSelected(){
+
+  if(!selectedObject){
+    toast("Selecione um objeto primeiro.");
+    return;
+  }
+
+  selectedObject.remove();
+  selectedObject=null;
+
+  stats.beauty=Math.max(0,stats.beauty-2);
+
+  updateStats();
+
+  toast("🗑️ Objeto removido!");
+}
+
+
+/* =========================
+   SHOP
+========================= */
+
+function buyItem(type,price){
+
+  if(coins<price){
+    toast("💸 Você não tem moedas suficientes!");
+    return;
+  }
+
+  coins-=price;
+
+  updateCoins();
+
+  createItem(type);
+
+  stats.beauty=Math.min(100,stats.beauty+3);
+
+  updateStats();
+
+  toast("✨ Item comprado e colocado na casa!");
+}
+
+
+function createItem(type){
+
+  const room=document.getElementById("room");
+
+  const obj=document.createElement("div");
+
+  obj.className="object";
+  obj.dataset.id=type;
+
+  const x=Math.random()*(room.clientWidth-100);
+  const y=room.clientHeight*.45+Math.random()*80;
+
+  obj.style.left=x+"px";
+  obj.style.top=y+"px";
+
+  if(type==="pelucia"){
+    obj.innerHTML="🧸";
+    obj.style.fontSize="58px";
+  }
+
+  if(type==="vaso"){
+    obj.innerHTML="🪴";
+    obj.style.fontSize="60px";
+  }
+
+  if(type==="vela"){
+    obj.innerHTML="🕯️";
+    obj.style.fontSize="55px";
+  }
+
+  if(type==="quadro"){
+    obj.innerHTML="🖼️";
+    obj.style.fontSize="65px";
+  }
+
+  if(type==="poltrona"){
+    obj.innerHTML="🪑";
+    obj.style.fontSize="85px";
+  }
+
+  if(type==="cesto"){
+    obj.innerHTML="🧺";
+    obj.style.fontSize="65px";
+  }
+
+  room.appendChild(obj);
+
+  enableObject(obj);
+
+}
+
+
+/* =========================
+   TASKS
+========================= */
+
+function completeTask(button,reward){
+
+  if(button.disabled) return;
+
+  button.disabled=true;
+  button.textContent="✓ Feito!";
+
+  coins+=reward;
+
+  updateCoins();
+
+  stats.clean=Math.min(100,stats.clean+5);
+  stats.happy=Math.min(100,stats.happy+4);
+
+  updateStats();
+
+  toast("🪙 +" + reward + " moedas!");
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+  document.getElementById("happyValue").textContent=stats.happy+"%";
+  document.getElementById("cleanValue").textContent=stats.clean+"%";
+  document.getElementById("beautyValue").textContent=stats.beauty+"%";
+
+  document.getElementById("happyBar").style.width=stats.happy+"%";
+  document.getElementById("cleanBar").style.width=stats.clean+"%";
+  document.getElementById("beautyBar").style.width=stats.beauty+"%";
+
+  localStorage.setItem("stats",JSON.stringify(stats));
+}
+
+updateStats();
+
+
+/* =========================
+   PANELS
+========================= */
+
+function openShop(){
+
+  document.getElementById("shopPanel").classList.add("active");
+  document.getElementById("tasksPanel").classList.remove("active");
+  document.getElementById("statsPanel").classList.remove("active");
+}
+
+
+function openTasks(){
+
+  document.getElementById("shopPanel").classList.remove("active");
+  document.getElementById("tasksPanel").classList.add("active");
+  document.getElementById("statsPanel").classList.remove("active");
+}
+
+
+/* =========================
+   NIGHT
+========================= */
+
+function toggleNight(){
+
+  document.body.classList.toggle("night");
+
+  const night=document.body.classList.contains("night");
+
+  localStorage.setItem("night",night);
+
+  toast(night ? "🌙 Modo noite ativado!" : "☀️ Modo dia ativado!");
+}
+
+if(localStorage.getItem("night")==="true"){
+  document.body.classList.add("night");
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+function openSettings(){
+  document.getElementById("settingsModal").classList.add("show");
+}
+
+function closeSettings(){
+  document.getElementById("settingsModal").classList.remove("show");
+}
+
+
+function setTheme(theme){
+
+  const wall=document.getElementById("wall");
+
+  if(theme==="pink"){
+    wall.style.background="linear-gradient(135deg,#ffeef3,#f9dce7)";
+  }
+
+  if(theme==="purple"){
+    wall.style.background="linear-gradient(135deg,#eee5fa,#d9c7ed)";
+  }
+
+  if(theme==="blue"){
+    wall.style.background="linear-gradient(135deg,#e5f5ff,#c8e6f7)";
+  }
+
+  if(theme==="cream"){
+    wall.style.background="linear-gradient(135deg,#fff7e8,#ead8bd)";
+  }
+
+  localStorage.setItem("theme",theme);
+
+  closeSettings();
+
+  toast("🎨 Casa personalizada!");
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+function saveGame(){
+
+  localStorage.setItem("coins",coins);
+  localStorage.setItem("stats",JSON.stringify(stats));
+  localStorage.setItem("room",currentRoom);
+
+  toast("💾 Sua casa foi salva!");
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetRoom(){
+
+  if(!confirm("Quer realmente resetar a decoração desta sala?")){
+    return;
+  }
+
+  location.reload();
+}
+
+
+/* =========================
+   LOAD
+========================= */
+
+const savedTheme=localStorage.getItem("theme");
+
+if(savedTheme){
+  setTheme(savedTheme);
+}
+
+
+/* =========================
+   PET
+========================= */
+
+function createPet(){
+
+  const room=document.getElementById("room");
+
+  const pet=document.createElement("div");
+
+  pet.className="object";
+
+  pet.id="pet";
+
+  pet.innerHTML="🐶";
+
+  pet.style.fontSize="65px";
+  pet.style.left="55%";
+  pet.style.bottom="7%";
+
+  pet.title="Seu pet 🐶";
+
+  room.appendChild(pet);
+
+  enableObject(pet);
+
+}
+
+createPet();
+
+
+/* =========================
+   PET CLICK
+========================= */
+
+document.getElementById("pet").addEventListener("dblclick",function(){
+
+  if(editMode) return;
+
+  stats.happy=Math.min(100,stats.happy+5);
+
+  updateStats();
+
+  toast("🐶 Seu pet ficou feliz!");
+});
+
+
+/* =========================
+   RANDOM DAILY BONUS
+========================= */
+
+let lastBonus=localStorage.getItem("dailyBonus");
+
+const today=new Date().toDateString();
+
+if(lastBonus!==today){
+
+  coins+=150;
+
+  updateCoins();
+
+  localStorage.setItem("dailyBonus",today);
+
+  setTimeout(()=>{
+    toast("🎁 Bônus diário: +150 moedas!");
+  },800);
+}
+
+
+/* =========================
+   CLICK OUTSIDE
+========================= */
+
+document.getElementById("room").addEventListener("click",function(e){
+
+  if(e.target===this || e.target.classList.contains("wall") || e.target.classList.contains("floor")){
+
+    document.querySelectorAll(".object").forEach(o=>{
+      o.classList.remove("selected");
+    });
+
+    selectedObject=null;
+  }
+
+});
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener("keydown",function(e){
+
+  if(!selectedObject || !editMode) return;
+
+  const step=5;
+
+  let left=parseFloat(selectedObject.style.left)||0;
+  let top=parseFloat(selectedObject.style.top)||0;
+
+  if(e.key==="ArrowLeft"){
+    selectedObject.style.left=(left-step)+"px";
+  }
+
+  if(e.key==="ArrowRight"){
+    selectedObject.style.left=(left+step)+"px";
+  }
+
+  if(e.key==="ArrowUp"){
+    selectedObject.style.top=(top-step)+"px";
+  }
+
+  if(e.key==="ArrowDown"){
+    selectedObject.style.top=(top+step)+"px";
+  }
+
+});
+
+
+/* =========================
+   AUTO SAVE
+========================= */
+
+setInterval(saveGame,10000);
+
+
+/* =========================
+   WELCOME
+========================= */
+
+setTimeout(()=>{
+  toast("🏠 Bem-vinda à sua casinha!");
+},500);
+
+</script>
+
+</body>
+</html>
